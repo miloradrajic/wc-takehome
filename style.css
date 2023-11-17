@@ -1127,6 +1127,9 @@ footer#colophon a {
 /*
 *		Content area
 */
+main#primary {
+	margin-top: 20px;
+}
 .content-area {
 	margin-top: 40px;
 	margin-bottom: 50px;
@@ -1150,6 +1153,44 @@ section.related.products {
 section.related.products h2 {
 	margin-bottom: 15px;
 }
+
+/*
+*		CHECKOUT
+*/
+div#customer_details {
+	display: flex;
+	gap: 15px;
+	justify-content: space-between;
+	margin: 0 -15px;
+}
+div#customer_details .col-1,
+div#customer_details .col-2
+{
+	flex: 1 1 auto;
+	max-width: 100%;
+	padding: 0;
+}
+span.woocommerce-input-wrapper {
+	display: block;
+	width: 100%;
+}
+.woocommerce form .form-row input.input-text {
+	line-height: 1.5;
+}
+.select2-container--default .select2-selection--single {
+	line-height: 1.5;
+	height: auto;
+	border-color: #ccc;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 38px;
+}
+
+
 
 
 /*
