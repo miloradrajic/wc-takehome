@@ -1065,7 +1065,14 @@ span.cart-count {
 	top: -15px;
 	right: -15px;
 }
-
+.languageSwitcher ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.cart-wrapper {
+	padding-right: 10px;
+}
 
 
 
@@ -1148,7 +1155,21 @@ section.related.products h2 {
 /*
 *		RESIZE BREAKPOINTS
 */
-
 @media only screen and (max-width: 991px) {
-	
+	ul#navbarSupportedContent {
+		flex-direction: column;
+		margin-top: 10px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.headerTop.container {
+    flex-wrap: wrap;
+	}
+	.headerTop .loginLink {
+    width: 100%;
+    order: 4;
+    text-align: center;
+    margin-top: 10px;
+	}
 }

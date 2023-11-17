@@ -48,44 +48,57 @@
 				<?php custom_login_link(); ?>
 			</div><!-- .loginLink -->
 			
-			<?php // Show cart
-				// Check if WooCommerce is active
-				if (class_exists('WooCommerce')){
-					global $woocommerce;
+			<div class="languageSwitcher">
+				<ul>
+					<?php 
+						pll_the_languages( 
+							array( 
+								'dropdown' => 0, 
+								'hide_current' => 1, 
+								'show_flags' => 1, 
+								'show_names' => 0,
+							) 
+						); 
 					?>
-					<div class="cart-wrapper">
-						<a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'starter'); ?>">
+				</ul>
+			</div>
+			<?php // Show cart
+			// Check if WooCommerce is active
+			if (class_exists('WooCommerce')){
+				global $woocommerce;
+				?>
+				<div class="cart-wrapper">
+					<a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'starter'); ?>">
+						<?php
+						$item_count = $woocommerce->cart->get_cart_contents_count();
+						$cart_icon = '<span class="dashicons dashicons-cart"></span>';
+						echo $cart_icon;
+						if ($item_count > 0) { ?>
+							<span class="cart-count"><?php echo esc_html($item_count); ?></span>
 							<?php
-							$item_count = $woocommerce->cart->get_cart_contents_count();
-							$cart_icon = '<span class="dashicons dashicons-cart"></span>';
-							echo $cart_icon;
-							if ($item_count > 0) {
-									?>
-									<span class="cart-count"><?php echo esc_html($item_count); ?></span>
-									<?php
-							}
-							?>
-						</a>
-					</div><!-- .cart-wrapper -->
-				<?php }; ?>
+						} ?>
+					</a>
+				</div><!-- .cart-wrapper -->
+				<?php 
+			}; ?>
 		</div><!-- .headerTop -->
 
-	<nav id="site-navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<div class="navWrapper">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php _e( 'Primary Menu', 'starter' ); ?>">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'navbarSupportedContent',
-					'menu_class'		 => 'collapse navbar-collapse'
-					)
-				);
-				?>
-			</div>
-		</div>
-	</nav><!-- #site-navigation -->
-</header><!-- #masthead -->
+		<nav id="site-navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<div class="navWrapper">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php _e( 'Primary Menu', 'starter' ); ?>">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'menu_id'        => 'navbarSupportedContent',
+						'menu_class'		 => 'collapse navbar-collapse'
+						)
+					);
+					?>
+				</div>
+			</div><!-- .container -->
+		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
