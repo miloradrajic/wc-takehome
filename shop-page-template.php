@@ -12,7 +12,7 @@ Template Name: Custom Shop page Template
 		<div class="container">
 			<?php
 				// Include WooCommerce product archive content
-				wc_get_template('archive-product.php');
+				echo do_shortcode('[products]');
 			?>
 		</div>
 		
