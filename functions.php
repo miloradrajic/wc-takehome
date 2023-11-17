@@ -187,3 +187,32 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+add_theme_support( 'woocommerce' );
+
+function custom_shop_page_template($template) {
+	if (is_shop()) {
+		// Set the path to your custom template file
+		$custom_template = locate_template('shop-page-template.php');
+		// Use the custom template if found, otherwise use the default template
+		$template = $custom_template ? $custom_template : $template;
+	}
+	return $template;
+}
+
+add_filter('template_include', 'custom_shop_page_template', 99);
+
+
+
+function custom_login_link() {
+	if (is_user_logged_in()) {
+		// User is logged in
+		global $current_user;
+
+		echo 'Welcome, ' . esc_html($current_user->display_name) . ' | ';
+		echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a>';
+	} else {
+		// User is not logged in
+		echo '<a href="' . wp_login_url() . '">My Account</a>';
+	}
+}
