@@ -209,10 +209,10 @@ function custom_login_link() {
 		// User is logged in
 		global $current_user;
 
-		echo 'Welcome, ' . esc_html($current_user->display_name) . ' | ';
-		echo '<a href="' . wp_logout_url(home_url()) . '">Logout</a>';
+		echo __('Welcome', 'starter'). ', ' . esc_html($current_user->display_name) . ' | ';
+		echo '<a href="' . wp_logout_url(home_url()) . '">'.__('Logout', 'starter').'</a>';
 	} else {
 		// User is not logged in
-		echo '<a href="' . wp_login_url() . '">My Account</a>';
+		echo '<a href="' . wp_login_url() . '">'.__('Login', 'starter').'</a>';
 	}
 }
