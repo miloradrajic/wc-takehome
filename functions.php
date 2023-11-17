@@ -197,6 +197,12 @@ function custom_shop_page_template($template) {
 		// Use the custom template if found, otherwise use the default template
 		$template = $custom_template ? $custom_template : $template;
 	}
+	if (is_cart()) {
+		// Set the path to your custom template file
+		$custom_template = locate_template('shop-cart-template.php');
+		// Use the custom template if found, otherwise use the default template
+		$template = $custom_template ? $custom_template : $template;
+	}
 	return $template;
 }
 
