@@ -22,18 +22,11 @@ get_header();
               <h1 class="entry-title"><?php the_title(); ?></h1>	
             </header>
             <div class="woocommerce">
-              <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['woocommerce-process-checkout-nonce'])) {
-                // If the form is posted, display the thank-you template
-                wc_get_template('checkout/thankyou.php');
-              } else {
-                // If the form is not posted, display the regular checkout form
-                wc_get_template('checkout/form-checkout.php');
-              } ?>
+              <?php wc_get_template('checkout/thankyou.php'); ?>
             </div><!-- .woocommerce -->
             <?php
           }else{
             get_template_part( 'template-parts/content', 'page' );
-
           }
       endwhile; // End of the loop.
 			?>

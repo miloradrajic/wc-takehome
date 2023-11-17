@@ -209,6 +209,13 @@ function custom_shop_page_template($template) {
 		// Use the custom template if found, otherwise use the default template
 		$template = $custom_template ? $custom_template : $template;
 	}
+	if ( is_wc_endpoint_url( 'order-received' ) ) {
+		// Set the path to your custom template file
+		$custom_template = locate_template('shop-thankyou-template.php');
+		// Use the custom template if found, otherwise use the default template
+		$template = $custom_template ? $custom_template : $template;
+
+	}
 	return $template;
 }
 
