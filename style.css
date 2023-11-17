@@ -1023,6 +1023,9 @@ input.qty {
 .woocommerce-message::before {
 	color: #fcb042;
 }
+.col-1, .col-2 {
+	max-width: initial !important;
+}
 
 /*
 *		HEADER
@@ -1189,7 +1192,9 @@ span.woocommerce-input-wrapper {
 .select2-container--default .select2-selection--single .select2-selection__arrow {
 	height: 38px;
 }
-
+div#order_review {
+	margin-bottom: 50px;
+}
 
 
 
