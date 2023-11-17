@@ -11,8 +11,8 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
+	<footer id="colophon" class="site-footer bg-dark">
+		<div class="site-info container">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'starter' ) ); ?>">
 				<?php
 				/* translators: %s: CMS name, i.e. WordPress. */
