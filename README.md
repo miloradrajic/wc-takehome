@@ -25,7 +25,94 @@ cd wc-takehome
 
 - Build and run the Docker container:
 docker pull mrajic/wc-takehome
-docker run -p 8888:80 wc-takehome
+docker run -d -p 8888:80 wc-takehome
+
+Alternatively, a simple Dockerfile and docker-compose.yml files can be used to generate a new image that includes the necessary content (which is a much cleaner solution than the bind mount above and edit files inside of the running container):
+
+``` docker
+# Use an official WordPress image as the base image
+FROM wordpress:latest
+
+# Set the working directory inside the container
+WORKDIR /var/www/html
+
+# Copy your WordPress files into the container
+COPY . .
+
+# Set proper ownership for Apache
+RUN chown -R www-data:www-data /var/www/html
+
+# Install MySQL client
+RUN apt-get update && \
+    apt-get install -y default-mysql-client
+
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
+
+ENV WORDPRESS_DB_NAME=wordpress \
+    WORDPRESS_DB_USER=wordpress \
+    WORDPRESS_DB_PASSWORD=password
+
+# Expose the necessary port
+EXPOSE 8888
+
+# Enable live updates during development
+RUN rm -rf /var/www/html/*
+
+# Start the Apache server
+CMD ["apache2-foreground"]
+```
+
+docker-compose.yml file
+``` docker-compose
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+    ports:
+      - "3333:3333"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wordpress
+
+  wordpress:
+    build:
+      context: .
+    depends_on:
+      - db
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - wordpress
+
+volumes:
+  wordpress:
+  db_data:
+
+networks:
+   wordpress:
+```
+After creating these 2 files in working directory, run command
+`docker compose up -d`
 
 - Navigate to theme folder 
 cd wordpress/wp-content/themes
