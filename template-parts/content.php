@@ -37,7 +37,7 @@
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'starter' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wc-takehome' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -50,7 +50,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'starter' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wc-takehome' ),
 				'after'  => '</div>',
 			)
 		);
