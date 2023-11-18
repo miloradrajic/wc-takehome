@@ -26,7 +26,7 @@ function starter_setup() {
 		* If you're building a theme based on starter, use a find and replace
 		* to change 'starter' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'starter', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'wc-takehome', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -49,7 +49,7 @@ function starter_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'starter' ),
+			'menu-1' => esc_html__( 'Primary', 'wc-takehome' ),
 		)
 	);
 
@@ -122,9 +122,9 @@ add_action( 'after_setup_theme', 'starter_content_width', 0 );
 function starter_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'starter' ),
+			'name'          => esc_html__( 'Sidebar', 'wc-takehome' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'starter' ),
+			'description'   => esc_html__( 'Add widgets here.', 'wc-takehome' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -191,30 +191,31 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 add_theme_support( 'woocommerce' );
 
 function custom_shop_page_template($template) {
-	if (is_shop()) {
-		// Set the path to your custom template file
-		$custom_template = locate_template('shop-page-template.php');
-		// Use the custom template if found, otherwise use the default template
-		$template = $custom_template ? $custom_template : $template;
-	}
-	if (is_cart()) {
-		// Set the path to your custom template file
-		$custom_template = locate_template('shop-cart-template.php');
-		// Use the custom template if found, otherwise use the default template
-		$template = $custom_template ? $custom_template : $template;
-	}
-	if (is_checkout()) {
-		// Set the path to your custom template file
-		$custom_template = locate_template('shop-checkout-template.php');
-		// Use the custom template if found, otherwise use the default template
-		$template = $custom_template ? $custom_template : $template;
-	}
-	if ( is_wc_endpoint_url( 'order-received' ) ) {
-		// Set the path to your custom template file
-		$custom_template = locate_template('shop-thankyou-template.php');
-		// Use the custom template if found, otherwise use the default template
-		$template = $custom_template ? $custom_template : $template;
-
+	if (class_exists('WooCommerce')){
+		if (is_shop()) {
+			// Set the path to your custom template file
+			$custom_template = locate_template('shop-page-template.php');
+			// Use the custom template if found, otherwise use the default template
+			$template = $custom_template ? $custom_template : $template;
+		}
+		if (is_cart()) {
+			// Set the path to your custom template file
+			$custom_template = locate_template('shop-cart-template.php');
+			// Use the custom template if found, otherwise use the default template
+			$template = $custom_template ? $custom_template : $template;
+		}
+		if (is_checkout()) {
+			// Set the path to your custom template file
+			$custom_template = locate_template('shop-checkout-template.php');
+			// Use the custom template if found, otherwise use the default template
+			$template = $custom_template ? $custom_template : $template;
+		}
+		if ( is_wc_endpoint_url( 'order-received' ) ) {
+			// Set the path to your custom template file
+			$custom_template = locate_template('shop-thankyou-template.php');
+			// Use the custom template if found, otherwise use the default template
+			$template = $custom_template ? $custom_template : $template;
+		}
 	}
 	return $template;
 }
@@ -228,10 +229,10 @@ function custom_login_link() {
 		// User is logged in
 		global $current_user;
 
-		echo __('Welcome', 'starter'). ', ' . esc_html($current_user->display_name) . ' | ';
-		echo '<a href="' . wp_logout_url(home_url()) . '">'.__('Logout', 'starter').'</a>';
+		echo __('Welcome', 'wc-takehome'). ', ' . esc_html($current_user->display_name) . ' | ';
+		echo '<a href="' . wp_logout_url(home_url()) . '">'.__('Logout', 'wc-takehome').'</a>';
 	} else {
 		// User is not logged in
-		echo '<a href="' . wp_login_url() . '">'.__('Login', 'starter').'</a>';
+		echo '<a href="' . wp_login_url() . '">'.__('Login', 'wc-takehome').'</a>';
 	}
 }

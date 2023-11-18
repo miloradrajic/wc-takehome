@@ -21,7 +21,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'starter' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'wc-takehome' ); ?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="headerTop container">
@@ -47,28 +47,32 @@
 			<div class="loginLink">
 				<?php custom_login_link(); ?>
 			</div><!-- .loginLink -->
-			
-			<div class="languageSwitcher">
-				<ul>
-					<?php 
-						pll_the_languages( 
-							array( 
-								'dropdown' => 0, 
-								'hide_current' => 1, 
-								'show_flags' => 1, 
-								'show_names' => 0,
-							) 
-						); 
-					?>
-				</ul>
-			</div>
+			<?php
+			// Check if polylang plugin is active 
+			if ( function_exists( 'pll_the_languages' ) ) { 
+				?>
+				<div class="languageSwitcher">
+					<ul>
+						<?php 
+							pll_the_languages( 
+								array( 
+									'dropdown' => 0, 
+									'hide_current' => 1, 
+									'show_flags' => 1, 
+									'show_names' => 0,
+								) 
+							); 
+						?>
+					</ul>
+				</div>
+			<?php } ?>
 			<?php // Show cart
 			// Check if WooCommerce is active
 			if (class_exists('WooCommerce')){
 				global $woocommerce;
 				?>
 				<div class="cart-wrapper">
-					<a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'starter'); ?>">
+					<a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e('View your shopping cart', 'wc-takehome'); ?>">
 						<?php
 						$item_count = $woocommerce->cart->get_cart_contents_count();
 						$cart_icon = '<span class="dashicons dashicons-cart"></span>';
@@ -86,7 +90,7 @@
 		<nav id="site-navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
 				<div class="navWrapper">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php _e( 'Primary Menu', 'starter' ); ?>">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php _e( 'Primary Menu', 'wc-takehome' ); ?>">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<?php

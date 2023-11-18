@@ -8,7 +8,6 @@ Template Name: Custom Shop page Template
 
 <div id="primary" class="content-area container">
 	<main id="main" class="site-main" role="main">
-fda
 		<div class="container">
 			<?php
 				// Get the ID of the WooCommerce shop page
